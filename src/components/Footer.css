@@ -1,0 +1,14 @@
+.footer {
+  background-color: #121212;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  color: white;
+}
+
+@media screen and (max-width: 550px) {
+  .footer {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+}
