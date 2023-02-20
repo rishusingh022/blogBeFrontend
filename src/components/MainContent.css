@@ -1,0 +1,9 @@
+.posts {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  gap: 2rem;
+  justify-content: center;
+}
