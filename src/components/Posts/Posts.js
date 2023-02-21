@@ -4,16 +4,38 @@ import clapping from "../../Assets/Icons/clapping.svg";
 import heart from "../../Assets/Icons/heart-black.svg";
 import likedHeart from "../../Assets/Icons/heart-red.svg";
 
+import dateFromUtcDate from "../../utils/common/dateFromUtcDate";
+import { makeRequest } from "../../utils/makeRequest/makeRequest";
+const { UPDATE_BLOG_DATA } = require("../../constants/apiEndPoints");
+
 function Posts(props) {
   const [like, setLike] = React.useState(props.liked);
   const [clap, setClap] = React.useState(props.claps);
-  const clapHandler = () => {
-    setClap(clap+1);
+  const clapHandler = async () => {
+    try {
+      await makeRequest(UPDATE_BLOG_DATA(props.id), {
+        data: {
+          claps: clap + 1,
+        },
+      });
+      setClap(clap + 1);
+    } catch (error) {
+      console.log(error);
+    }
   };
-  const likeHandler = () => {
-    setLike(!like);
+  const likeHandler = async () => {
+    try {
+      await makeRequest(UPDATE_BLOG_DATA(props.id), {
+        data: {
+          liked: !like,
+        },
+      });
+      setLike(!like);
+    } catch (error) {
+      console.log(error);
+    }
   };
-  const imgSrc = require(`../../Assets/Images/${props.image}`);
+  const imgSrc = props.image;
   return (
     <div className="card">
       <div className="card__image">
@@ -21,7 +43,7 @@ function Posts(props) {
       </div>
       <div className="card__content">
         <div className="card__content__date">
-          <p>{props.date}</p>
+          <p>{dateFromUtcDate(props.date)}</p>
           <p>{props.readingTime}</p>
         </div>
         <div className="card__content__title">

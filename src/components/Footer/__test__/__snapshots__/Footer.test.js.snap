@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer should render corrently 1`] = `
+<DocumentFragment>
+  <div
+    class="body-padding footer"
+  >
+    © artifact.com 2019
+  </div>
+</DocumentFragment>
+`;
