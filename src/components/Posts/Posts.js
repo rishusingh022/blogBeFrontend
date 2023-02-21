@@ -1,8 +1,8 @@
 import React from "react";
 import "./Posts.css";
-import clapping from "../Assets/Icons/clapping.svg";
-import heart from "../Assets/Icons/heart-black.svg";
-import likedHeart from "../Assets/Icons/heart-red.svg";
+import clapping from "../../Assets/Icons/clapping.svg";
+import heart from "../../Assets/Icons/heart-black.svg";
+import likedHeart from "../../Assets/Icons/heart-red.svg";
 
 function Posts(props) {
   const [like, setLike] = React.useState(props.liked);
@@ -13,7 +13,7 @@ function Posts(props) {
   const likeHandler = () => {
     setLike(!like);
   };
-  const imgSrc = require(`../Assets/Images/${props.image}`);
+  const imgSrc = require(`../../Assets/Images/${props.image}`);
   return (
     <div className="card">
       <div className="card__image">

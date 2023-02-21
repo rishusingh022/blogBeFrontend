@@ -1,7 +1,7 @@
 import React from 'react'
 import './MainContent.css'
-import Posts from './Posts'
-import jsonData from '../Assets/mockData/index.json'
+import Posts from '../Posts/Posts'
+import jsonData from '../../Assets/mockData/index.json'
 function MainContent() {
   return (
     <div className='posts'>
