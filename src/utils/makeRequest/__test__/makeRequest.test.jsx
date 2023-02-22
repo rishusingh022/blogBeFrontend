@@ -67,4 +67,40 @@ describe("makeRequest", () => {
       },
     });
   });
+  it('should navigate to error page with status code when API call returns error status code"', async () => {
+    const mockNavigate = jest.fn();
+    const mockedAxios = axios;
+    mockedAxios.mockRejectedValue({
+      response: {
+        status: 500,
+      },
+    });
+    expect(mockNavigate).not.toBeCalled();
+    await makeRequest(
+      UPDATE_BLOG_DATA(1),
+      {
+        data: { claps: 1 },
+      },
+      mockNavigate
+    );
+    expect(mockNavigate).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledWith(`/error/500`);
+  });
+  it('should navigate to error page without status code when API call returns error without status code"', async () => {
+    const mockNavigate = jest.fn();
+    const mockedAxios = axios;
+    mockedAxios.mockRejectedValue({
+      response: {},
+    });
+    expect(mockNavigate).not.toBeCalled();
+    await makeRequest(
+      UPDATE_BLOG_DATA(1),
+      {
+        data: { claps: 1 },
+      },
+      mockNavigate
+    );
+    expect(mockNavigate).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledWith(`/error`);
+  });
 });

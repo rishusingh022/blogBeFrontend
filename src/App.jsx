@@ -4,6 +4,10 @@ import Footer from "./components/Footer/Footer";
 import MainContent from "./components/MainContent/MainContent";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./components/MainContent/MainContent.css";
+
+import Error  from "./pages/Error/Error";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
+
 function App() {
   return (
     <div className="app">
@@ -19,17 +23,8 @@ function App() {
               </div>
             }
           />
-          <Route path="*" element={<h1>404 Not Found</h1>} />
-          <Route
-            path="/error/:errorCode?"
-            element={
-              <div>
-                <Header />
-                <h1 className="posts">404 Not Found</h1>
-                <Footer />
-              </div>
-            }
-          />
+          <Route path="*" element={<PageNotFound />} />
+          <Route path="/error/:errorCode?" element={<Error />} />
         </Routes>
       </BrowserRouter>
     </div>

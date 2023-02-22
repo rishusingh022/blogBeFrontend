@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should render without crashing 1`] = `
+<div>
+  <div
+    class="app"
+  >
+    <div>
+      <nav
+        class="body-padding"
+      >
+        <div>
+          <h1>
+            The Artifacts
+          </h1>
+          <p>
+            <em>
+              Culture & Art Blogs
+            </em>
+          </p>
+        </div>
+        <ul>
+          <li>
+            <a
+              href="#"
+            >
+              Blog
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+            >
+              About
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+            >
+              Contact
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div
+        class="posts"
+      />
+      <div
+        class="body-padding footer"
+      >
+        © artifact.com 2019
+      </div>
+    </div>
+  </div>
+</div>
+`;

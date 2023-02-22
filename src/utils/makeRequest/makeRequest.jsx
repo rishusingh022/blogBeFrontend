@@ -1,8 +1,12 @@
 import axios from "axios";
 import { BACKEND_URL } from "../../constants/apiEndPoints";
-import { NavigateFunction } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export const makeRequest = async (apiEndPoint, dynamicConfig = {}) => {
+export const makeRequest = async (
+  apiEndPoint,
+  dynamicConfig = {},
+  navigate = useNavigate
+) => {
   try {
     const requestDetails = {
       baseURL: BACKEND_URL,
@@ -13,13 +17,14 @@ export const makeRequest = async (apiEndPoint, dynamicConfig = {}) => {
     const { data } = await axios(requestDetails);
     return data;
   } catch (error) {
-    // if(NavigateFunction){
-    //   const errorStatus = error.response?.status;
-    //   if(errorStatus){
-    //     NavigateFunction(`/error/${errorStatus}`);
-    //   }else {
-    //     NavigateFunction(`/error/500`);
-    //   }
-    // }
+    if(navigate){
+      const errorStatus = error.response?.status;
+      if(errorStatus){
+        navigate(`/error/${errorStatus}`);
+      }else {
+        navigate(`/error`);
+      }
+    }
+    
   }
 };
