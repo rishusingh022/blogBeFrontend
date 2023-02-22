@@ -24,6 +24,7 @@ function MainContent() {
     <div className="posts">
       {posts.map((post, index) => (
         <Posts
+          key={index}
           id={post.id}
           date={post.date}
           readingTime={post.reading_time}

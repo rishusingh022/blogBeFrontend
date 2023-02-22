@@ -37,14 +37,14 @@ function Posts(props) {
   };
   const imgSrc = props.image;
   return (
-    <div className="card">
+    <div className="card" data-testid="blog-posts">
       <div className="card__image">
-        <img src={imgSrc} alt="post" />
+        <img src={imgSrc} alt="postImage" />
       </div>
       <div className="card__content">
         <div className="card__content__date">
           <p>{dateFromUtcDate(props.date)}</p>
-          <p>{props.readingTime}</p>
+          <p>{props.reading_time}</p>
         </div>
         <div className="card__content__title">
           <h3>{props.title}</h3>
@@ -61,6 +61,7 @@ function Posts(props) {
         </div>
         <div className="likes">
           <img
+            data-testid="blackRedHeart"
             onClick={likeHandler}
             src={like ? likedHeart : heart}
             alt="heart"
