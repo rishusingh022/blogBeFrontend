@@ -45,7 +45,11 @@ exports[`App should render without crashing 1`] = `
       </nav>
       <div
         class="posts"
-      />
+      >
+        <h1>
+          Loading...
+        </h1>
+      </div>
       <div
         class="body-padding footer"
       >

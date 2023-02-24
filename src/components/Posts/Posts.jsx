@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Posts.css";
 import clapping from "../../Assets/Icons/clapping.svg";
 import heart from "../../Assets/Icons/heart-black.svg";
@@ -6,19 +6,32 @@ import likedHeart from "../../Assets/Icons/heart-red.svg";
 
 import dateFromUtcDate from "../../utils/common/dateFromUtcDate";
 import { makeRequest } from "../../utils/makeRequest/makeRequest";
+import { BlogPostContext } from "../../contexts/BlogPostContext";
 const { UPDATE_BLOG_DATA } = require("../../constants/apiEndPoints");
 
 function Posts(props) {
-  const [like, setLike] = React.useState(props.liked);
-  const [clap, setClap] = React.useState(props.claps);
+  const {posts, setPosts} = useContext(BlogPostContext);
+  let id = props.id;
+  // find the index of the post
+  let index = posts.findIndex((post) => post.id === id);
+  // update the claps
+  // const [like, setLike] = React.useState(props.liked);
+  // const [clap, setClap] = React.useState(props.claps);
   const clapHandler = async () => {
     try {
       await makeRequest(UPDATE_BLOG_DATA(props.id), {
         data: {
-          claps: clap + 1,
+          claps: posts[index].claps + 1,
         },
       });
-      setClap(clap + 1);
+      setPosts([
+        ...posts.slice(0, index),
+        {
+          ...posts[index],
+          claps: posts[index].claps + 1,
+        },
+        ...posts.slice(index + 1),
+      ]);
     } catch (error) {
       console.log(error);
     }
@@ -27,10 +40,13 @@ function Posts(props) {
     try {
       await makeRequest(UPDATE_BLOG_DATA(props.id), {
         data: {
-          liked: !like,
+          liked: posts[index].liked ? false : true,
         },
       });
-      setLike(!like);
+      // update the state
+      let updatedPosts = [...posts];
+      updatedPosts[index].liked = updatedPosts[index].liked ? false : true;
+      setPosts(updatedPosts);
     } catch (error) {
       console.log(error);
     }
@@ -57,13 +73,13 @@ function Posts(props) {
       <div className="card__footer">
         <div className="claps">
           <img onClick={clapHandler} src={clapping} alt="clapping"></img>
-          <p>{clap}</p>
+          <p>{posts[index].claps}</p>
         </div>
         <div className="likes">
           <img
             data-testid="blackRedHeart"
             onClick={likeHandler}
-            src={like ? likedHeart : heart}
+            src={posts[index].liked ? likedHeart : heart}
             alt="heart"
           />
         </div>

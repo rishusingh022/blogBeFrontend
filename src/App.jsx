@@ -5,8 +5,9 @@ import MainContent from "./components/MainContent/MainContent";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./components/MainContent/MainContent.css";
 
-import Error  from "./pages/Error/Error";
+import Error from "./pages/Error/Error";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import { BlogPostProvider } from "./contexts/BlogPostContext";
 
 function App() {
   return (
@@ -17,9 +18,11 @@ function App() {
             path="/"
             element={
               <div>
-                <Header />
-                <MainContent />
-                <Footer />
+                <BlogPostProvider>
+                  <Header />
+                  <MainContent />
+                  <Footer />
+                </BlogPostProvider>
               </div>
             }
           />

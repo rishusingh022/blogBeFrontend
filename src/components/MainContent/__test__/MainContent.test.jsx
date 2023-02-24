@@ -2,6 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import React from "react";
 import MainContent from "../MainContent";
 import { makeRequest } from "../../../utils/makeRequest/makeRequest";
+import { BlogPostProvider } from "../../../contexts/BlogPostContext";
 jest.mock("../../../utils/makeRequest/makeRequest");
 describe("MainContent", () => {
   const mockPostData = [
@@ -28,7 +29,11 @@ describe("MainContent", () => {
   ];
   it("should show the blog posts when data is loaded", async () => {
     makeRequest.mockResolvedValue(mockPostData);
-    render(<MainContent />);
+    render(
+      <BlogPostProvider>
+        <MainContent />
+      </BlogPostProvider>
+    );
     await waitFor(() => {
       expect(screen.getAllByTestId("blog-posts").length).toEqual(2);
     });
