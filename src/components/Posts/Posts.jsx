@@ -10,7 +10,7 @@ import { BlogPostContext } from "../../contexts/BlogPostContext";
 const { UPDATE_BLOG_DATA } = require("../../constants/apiEndPoints");
 
 function Posts(props) {
-  const {posts, setPosts} = useContext(BlogPostContext);
+  const { posts, setPosts } = useContext(BlogPostContext);
   let id = props.id;
   // find the index of the post
   let index = posts.findIndex((post) => post.id === id);
@@ -18,38 +18,31 @@ function Posts(props) {
   // const [like, setLike] = React.useState(props.liked);
   // const [clap, setClap] = React.useState(props.claps);
   const clapHandler = async () => {
-    try {
-      await makeRequest(UPDATE_BLOG_DATA(props.id), {
-        data: {
-          claps: posts[index].claps + 1,
-        },
-      });
-      setPosts([
-        ...posts.slice(0, index),
-        {
-          ...posts[index],
-          claps: posts[index].claps + 1,
-        },
-        ...posts.slice(index + 1),
-      ]);
-    } catch (error) {
-      console.log(error);
-    }
+    await makeRequest(UPDATE_BLOG_DATA(props.id), {
+      data: {
+        claps: posts[index].claps + 1,
+      },
+    });
+    setPosts([
+      ...posts.slice(0, index),
+      {
+        ...posts[index],
+        claps: posts[index].claps + 1,
+      },
+      ...posts.slice(index + 1),
+    ]);
+    
   };
   const likeHandler = async () => {
-    try {
-      await makeRequest(UPDATE_BLOG_DATA(props.id), {
-        data: {
-          liked: posts[index].liked ? false : true,
-        },
-      });
-      // update the state
-      let updatedPosts = [...posts];
-      updatedPosts[index].liked = updatedPosts[index].liked ? false : true;
-      setPosts(updatedPosts);
-    } catch (error) {
-      console.log(error);
-    }
+    await makeRequest(UPDATE_BLOG_DATA(props.id), {
+      data: {
+        liked: posts[index].liked ? false : true,
+      },
+    });
+    // update the state
+    let updatedPosts = [...posts];
+    updatedPosts[index].liked = updatedPosts[index].liked ? false : true;
+    setPosts(updatedPosts);
   };
   const imgSrc = props.image;
   return (
@@ -77,7 +70,7 @@ function Posts(props) {
         </div>
         <div className="likes">
           <img
-            data-testid="blackRedHeart"
+            data-testid="RedHeart"
             onClick={likeHandler}
             src={posts[index].liked ? likedHeart : heart}
             alt="heart"

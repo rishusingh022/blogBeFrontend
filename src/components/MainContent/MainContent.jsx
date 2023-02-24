@@ -22,9 +22,6 @@ function MainContent() {
       .then((response) => {
         setPosts(response);
       })
-      .catch((error) => {
-        setError(error.messsage);
-      });
       // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   

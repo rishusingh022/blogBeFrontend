@@ -3,9 +3,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import React from "react";
 import Posts from "../Posts";
 import { makeRequest } from "../../../utils/makeRequest/makeRequest";
-import {
-  BlogPostContext,
-} from "../../../contexts/BlogPostContext";
+import { BlogPostContext } from "../../../contexts/BlogPostContext";
 
 jest.mock("../../../utils/makeRequest/makeRequest");
 
